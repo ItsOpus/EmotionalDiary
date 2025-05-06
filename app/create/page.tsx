@@ -10,14 +10,39 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { useToast } from "@/hooks/use-toast"
 import BackgroundSlideshow from "@/components/background-slideshow"
+import Image from "next/image"
 
 export default function CreatePage() {
   const [title, setTitle] = useState("")
   const [content, setContent] = useState("")
   const [author, setAuthor] = useState("")
+  const [imageUrl, setImageUrl] = useState("")
+  const [isImageValid, setIsImageValid] = useState(true)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const router = useRouter()
   const { toast } = useToast()
+
+  const validateImageUrl = (url: string) => {
+    if (!url) {
+      setIsImageValid(true)
+      return true
+    }
+
+    try {
+      new URL(url)
+      setIsImageValid(true)
+      return true
+    } catch (e) {
+      setIsImageValid(false)
+      return false
+    }
+  }
+
+  const handleImageUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const url = e.target.value
+    setImageUrl(url)
+    validateImageUrl(url)
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -25,7 +50,16 @@ export default function CreatePage() {
     if (!title.trim() || !content.trim() || !author.trim()) {
       toast({
         title: "Missing fields",
-        description: "Please fill in all fields",
+        description: "Please fill in all required fields",
+        variant: "destructive",
+      })
+      return
+    }
+
+    if (imageUrl && !isImageValid) {
+      toast({
+        title: "Invalid image URL",
+        description: "Please enter a valid URL for the image",
         variant: "destructive",
       })
       return
@@ -43,6 +77,7 @@ export default function CreatePage() {
           title,
           content,
           author,
+          imageUrl: imageUrl || undefined,
         }),
       })
 
@@ -98,6 +133,30 @@ export default function CreatePage() {
                 placeholder="Enter your name"
                 required
               />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="imageUrl">Image URL (optional)</Label>
+              <Input
+                id="imageUrl"
+                value={imageUrl}
+                onChange={handleImageUrlChange}
+                className={`bg-white/10 border-white/20 ${!isImageValid ? "border-red-500" : ""}`}
+                placeholder="https://example.com/your-image.jpg"
+              />
+              {!isImageValid && <p className="text-red-500 text-sm">Please enter a valid URL</p>}
+
+              {imageUrl && isImageValid && (
+                <div className="mt-2 relative w-full h-48 rounded-lg overflow-hidden">
+                  <Image
+                    src={imageUrl || "/placeholder.svg"}
+                    alt="Preview"
+                    fill
+                    className="object-cover"
+                    onError={() => setIsImageValid(false)}
+                  />
+                </div>
+              )}
             </div>
 
             <div className="space-y-2">

@@ -17,7 +17,7 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
-    const { title, content, author } = await request.json()
+    const { title, content, author, imageUrl } = await request.json()
 
     if (!title || !content || !author) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
@@ -30,6 +30,7 @@ export async function POST(request: Request) {
       title,
       content,
       author,
+      imageUrl,
       createdAt: new Date().toISOString(),
       likes: 0,
       comments: [],

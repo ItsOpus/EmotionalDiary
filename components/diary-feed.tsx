@@ -12,6 +12,7 @@ export type DiaryPost = {
   createdAt: string
   likes: number
   comments: Comment[]
+  imageUrl?: string
 }
 
 export type Comment = {
@@ -84,6 +85,7 @@ export default function DiaryFeed() {
         {[...Array(6)].map((_, i) => (
           <div key={i} className="diary-content">
             <Skeleton className="h-8 w-3/4 mb-4" />
+            <Skeleton className="h-40 w-full mb-4 rounded-lg" />
             <Skeleton className="h-4 w-full mb-2" />
             <Skeleton className="h-4 w-full mb-2" />
             <Skeleton className="h-4 w-2/3" />

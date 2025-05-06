@@ -8,7 +8,7 @@ export default function Home() {
     <div className="relative min-h-screen">
       <BackgroundSlideshow />
       <div className="relative z-10 container mx-auto px-4 py-12">
-        <div className="flex flex-col items-center justify-center space-y-8 text-center">
+        <div className="flex flex-col items-center justify-center space-y-8 text-center mt-16">
           <h1 className="text-4xl md:text-6xl font-bold text-white">Emotional Diary</h1>
           <p className="text-xl text-white/80 max-w-2xl">
             Share your thoughts and feelings with the world. Express yourself freely in a safe space.
