@@ -116,6 +116,7 @@ export default function PostDetail({ post }: PostDetailProps) {
           <span className="font-medium text-white/80">{post.author}</span>
           <span>{formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })}</span>
         </div>
+        <div className="text-xs italic text-white/30 text-right">Post ID: {post._id}</div>
       </div>
 
       <div className="flex items-center gap-4 border-t border-white/10 pt-4 mb-6">
@@ -169,7 +170,9 @@ export default function PostDetail({ post }: PostDetailProps) {
                 </Avatar>
                 <div className="flex-1">
                   <div className="flex justify-between">
-                    <span className="font-medium">{comment.author}</span>
+                    <span className="font-medium">
+                      {comment.author} <span className="text-xs text-white/40">(ID: {comment._id})</span>
+                    </span>
                     <span className="text-xs text-white/50">
                       {formatDistanceToNow(new Date(comment.createdAt), { addSuffix: true })}
                     </span>

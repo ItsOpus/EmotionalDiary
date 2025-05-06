@@ -2,9 +2,9 @@ import { NextResponse } from "next/server"
 import clientPromise from "@/lib/mongodb"
 import { ObjectId } from "mongodb"
 
-export async function DELETE(request: Request, { params }: { params: { id: string } }) {
+export async function DELETE(request: Request, { params }: { params: { postId: string } }) {
   try {
-    const id = params.id
+    const postId = params.postId
     const { password } = await request.json()
 
     // Verify admin password
@@ -12,7 +12,7 @@ export async function DELETE(request: Request, { params }: { params: { id: strin
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
     }
 
-    if (!ObjectId.isValid(id)) {
+    if (!ObjectId.isValid(postId)) {
       return NextResponse.json({ error: "Invalid post ID" }, { status: 400 })
     }
 
@@ -20,7 +20,7 @@ export async function DELETE(request: Request, { params }: { params: { id: strin
     const db = client.db("emotional-diary")
 
     const result = await db.collection("posts").deleteOne({
-      _id: new ObjectId(id),
+      _id: new ObjectId(postId),
     })
 
     if (result.deletedCount === 0) {

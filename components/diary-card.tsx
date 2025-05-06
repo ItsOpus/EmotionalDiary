@@ -184,7 +184,9 @@ export default function DiaryCard({ post, onLike, onAddComment }: DiaryCardProps
                     </Avatar>
                     <div className="flex-1">
                       <div className="flex justify-between">
-                        <span className="text-sm font-medium">{comment.author}</span>
+                        <span className="text-sm font-medium">
+                          {comment.author} <span className="text-xs text-white/40">(ID: {comment._id})</span>
+                        </span>
                         <span className="text-xs text-white/50">
                           {formatDistanceToNow(new Date(comment.createdAt), { addSuffix: true })}
                         </span>
@@ -198,6 +200,7 @@ export default function DiaryCard({ post, onLike, onAddComment }: DiaryCardProps
           </AccordionItem>
         </Accordion>
       )}
+      {expanded && <div className="mt-4 text-xs italic text-white/30 text-right">Post ID: {post._id}</div>}
     </div>
   )
 }
