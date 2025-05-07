@@ -35,7 +35,7 @@ export default function AboutPage() {
             <p>
               If you have any questions, suggestions, or concerns, please don't hesitate to reach out to us at
               <a href="mailto:support@emotionaldiary.com" className="text-primary hover:underline ml-1">
-                support@emotionaldiary.com
+                wow.itsopus@gmail.com
               </a>
             </p>
           </div>
