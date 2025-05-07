@@ -34,7 +34,7 @@ export default function AboutPage() {
             <h2 className="text-xl font-semibold text-white mt-6">Contact Us</h2>
             <p>
               If you have any questions, suggestions, or concerns, please don't hesitate to reach out to us at
-              <a href="mailto:support@emotionaldiary.com" className="text-primary hover:underline ml-1">
+              <a href="mailto:wow.itsopus@gmail.com" className="text-primary hover:underline ml-1">
                 wow.itsopus@gmail.com
               </a>
             </p>
